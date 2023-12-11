@@ -148,7 +148,7 @@
             {{- end -}}
         },
         {{- if .Params.authors -}}
-        "authors": [
+        "author": [
         {{- $lang := ( $.Params.lang | default $.Lang ) -}}
         {{- range $i, $name := .Params.authors -}}
             {{- if $.Site.Data.author -}}
