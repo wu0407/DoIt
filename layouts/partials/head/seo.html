@@ -151,28 +151,34 @@
         "author": [
         {{- $lang := ( $.Params.lang | default $.Lang ) -}}
         {{- range $i, $name := .Params.authors -}}
-            {{- if $.Site.Data.author -}}
+            {{- if $.Site.Data.authors -}}
                 {{- with partial "function/author.html" (dict "name" $name "author" (index $.Site.Data.authors $name) "lang" $lang) -}}
                     {{- if gt $i 0 }},{{ end -}}
                     {
                         "@type": "Person",
-                        "name": "{{ .name }}"
+                        "name": "{{ .name }}",
+                        "url": {{ .absLink }}
                     }
                 {{- end -}}
             {{- else -}}
+                {{- with partial "function/author.html" (dict "name" $name "lang" $lang) -}}
                     {{- if gt $i 0 }},{{ end -}}
                     {
                         "@type": "Person",
-                        "name": "{{ $name }}"                    
+                        "name": "{{ $name }}",
+                        "url": {{ .link | absURL }}
                     }
+                {{- end -}}
             {{- end -}}
         {{- end -}}
         ],
         {{- else -}}
+            {{- $link := .Params.authorlink | default .Site.Author.link | default .Site.Home.RelPermalink -}}
             {{- with .Params.author | default .Site.Author.name | default (T "author") -}}
             "author": {
                 "@type": "Person",
-                "name": {{ . | safeHTML }}
+                "name": {{ . | safeHTML }},
+                "url": {{ $link }}
             },
             {{- end -}}
         {{- end -}}
