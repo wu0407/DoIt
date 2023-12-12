@@ -23,7 +23,7 @@
 {{- end -}}
 
 {{- /* Home SEO */ -}}
-{{- if .IsHome -}}
+{{- if and .IsHome (eq .Paginator.PageNumber 1) (eq .Paginator.URL "/") -}}
     <script type="application/ld+json">
     {
         "@context": "http://schema.org",
