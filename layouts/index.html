@@ -1,6 +1,6 @@
 {{- define "title" }}
-    {{- if ne .Site.Params.home.posts.enable false | and .Site.RegularPages (gt .Paginator.PageNumber 1) -}}
-        {{- T "posts" }} Page {{ .Paginator.PageNumber }} of {{ .Paginator.TotalPages }} - {{ .Site.Title -}}
+    {{- if (gt .Paginator.PageNumber 1) -}}
+        {{- T "prefixPageNumber" }} {{ .Paginator.PageNumber }} {{ T "suffixPageNumber" }} - {{ .Site.Title -}}
     {{ else }}
         {{ .Site.Title -}}
     {{- end -}}

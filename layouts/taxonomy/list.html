@@ -1,5 +1,9 @@
 {{- define "title" -}}
-    {{- .Title }} - {{ T .Data.Singular | default .Data.Singular }} - {{ .Site.Title -}}
+    {{ $pageNumber := "" }}
+    {{- if (gt .Paginator.PageNumber 1) -}}
+        {{ $pageNumber = printf "%v %v %v" (T "prefixPageNumber" ) .Paginator.PageNumber (T "suffixPageNumber" ) }}
+    {{- end -}}
+    {{- .Title }} - {{ T .Data.Singular | default .Data.Singular }} {{ $pageNumber }} - {{ .Site.Title -}}
 {{- end -}}
 
 {{- define "content" -}}
@@ -49,15 +53,11 @@
         </div>
         {{- end -}}
         {{- /* Paginate */ -}}
+        {{- /* Paginate is first call on baseof.html */ -}}
         {{- if .Pages -}}
             {{- $taxonomy := .Data.Singular -}}
             {{- if eq $taxonomy "series" -}}
-                {{- $pages := .Pages.ByParam "series_weight" -}}
-                {{- with .Site.Params.list.paginate | default .Site.Params.paginate -}}
-                    {{- $pages = $.Paginate $pages . -}}
-                {{- else -}}
-                    {{- $pages = .Paginate $pages -}}
-                {{- end -}}
+                {{- $pages := .Paginate (.Pages.ByParam "series_weight") -}}
                 {{- range $pages.Pages -}}
                     <article class="archive-item">
                         <a href="{{ .RelPermalink }}" class="archive-item-link">
@@ -69,12 +69,7 @@
                     </article>
                 {{- end -}}
             {{- else -}}
-                {{- $pages := .Pages.GroupByDate "2006" -}}
-                {{- with .Site.Params.list.paginate | default .Site.Params.paginate -}}
-                    {{- $pages = $.Paginate $pages . -}}
-                {{- else -}}
-                    {{- $pages = .Paginate $pages -}}
-                {{- end -}}
+                {{- $pages := .Paginate (.Pages.GroupByDate "2006") -}}
                 {{- range $pages.PageGroups -}}
                     <h3 class="group-title">{{ .Key }}</h3>
                     {{- range .Pages -}}
