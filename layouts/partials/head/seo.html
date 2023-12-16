@@ -1,5 +1,3 @@
-{{- $params := .Scratch.Get "params" -}}
-
 {{- with .Site.Params.verification.google -}}
     <meta name="google-site-verification" content="{{ . }}" />
 {{- end -}}
@@ -25,7 +23,9 @@
 {{- define "blogPosting" -}}
 {{- $params := .Scratch.Get "params" -}}
 {
-    "@context": "http://schema.org",
+    {{- if not .IsPage -}}
+    "@context": "https://schema.org",
+    {{- end -}}
     "@type": "BlogPosting",
     "headline": {{ .Title | safeHTML }},
     "inLanguage": "{{ .Site.LanguageCode }}",
@@ -156,6 +156,8 @@
     {{- $showWebSite := and (eq .Paginator.PageNumber 1) (eq .Paginator.URL "/") -}}
     {{- if or $showBlogPosting $showWebSite -}}
         <script type="application/ld+json">
+        {"@context": "https://schema.org",
+        "@graph": [
         {{- if $showBlogPosting -}}
             {{- /* Paginate is first call on baseof.html */ -}}
             {{- range .Paginator.Pages -}}
@@ -164,7 +166,6 @@
         {{- end -}}
         {{- if and (eq .Paginator.PageNumber 1) (eq .Paginator.URL "/") -}}
             {
-                "@context": "http://schema.org",
                 "@type": "WebSite",
                 "url": {{ .Permalink }},
                 {{- with .Site.LanguageCode -}}
@@ -205,9 +206,26 @@
                 {{- with .Site.Params.seo.alternateName -}}
                     "alternateName": {{- apply . "safeHTML" "." -}},
                 {{- end -}}
+                {{- with .Site.Params.footer.since -}}
+                    "copyrightYear": {{ . }},
+                {{- else -}}
+                    "copyrightYear": {{ now.Year }},
+                {{- end -}}
+                {{- with .Site.Params.footer.author -}}
+                    "copyrightHolder": {
+                        "@type": "Person",
+                        "name": {{ . | safeHTML }}
+                    },
+                {{- else -}}
+                    "copyrightHolder": {
+                        "@type": "Person",
+                        "name": {{ .Site.Author.name | safeHTML }}
+                    },
+                {{- end -}}
                 "name": {{ .Site.Title | safeHTML }}
             }
         {{- end -}}
+        ]}
         </script>
     {{- end -}}
 
