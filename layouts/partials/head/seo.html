@@ -211,10 +211,10 @@
                 {{- else -}}
                     "copyrightYear": {{ now.Year }},
                 {{- end -}}
-                {{- with .Site.Params.footer.author -}}
+                {{- if .Site.Params.footer.author -}}
                     "copyrightHolder": {
                         "@type": "Person",
-                        "name": {{ . | safeHTML }}
+                        "name": {{ .Site.Params.footer.author | safeHTML }}
                     },
                 {{- else if .Site.Author.name -}}
                     "copyrightHolder": {
