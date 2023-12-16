@@ -3,7 +3,7 @@
         {{- if gt .PageNumber 1 -}}
             {{- T "prefixPageNumber" }} {{ .PageNumber }} {{ T "suffixPageNumber" }} - {{ $.Site.Title -}}
         {{ else }}
-            {{ $.Site.Title -}}
+            {{- $.Site.Title -}}
         {{- end -}}
     {{- end -}}
 {{- end -}}
