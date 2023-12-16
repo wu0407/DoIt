@@ -216,7 +216,7 @@
                         "@type": "Person",
                         "name": {{ . | safeHTML }}
                     },
-                {{- else -}}
+                {{- else if .Site.Author.name -}}
                     "copyrightHolder": {
                         "@type": "Person",
                         "name": {{ .Site.Author.name | safeHTML }}
