@@ -74,7 +74,7 @@
     {{- end -}}
     "genre": "{{ .Type }}",
     {{- if .Params.keywords -}}
-        "keywords": {{- apply .Params.keywords "print" "." -}},
+        "keywords": {{- apply .Params.keywords "safeHTML" "." -}},
     {{- else if .Params.tags -}}
         "keywords": {{- apply .Params.tags "safeHTML" "." -}},
     {{- end -}}
