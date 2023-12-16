@@ -17,9 +17,8 @@
         {{- /* Paginate */ -}}
         {{- /* Paginate is first call on baseof.html */ -}}
         {{- if .Pages -}}
-            {{- $pages := .Paginate (.Pages.GroupByDate "2006") -}}
             {{- partial "recentlyUpdated.html" . -}}
-            {{- range $pages.PageGroups -}}
+            {{- range .Paginator.PageGroups -}}
                 <h3 class="group-title">{{ .Key }}</h3>
                 {{- range .Pages -}}
                     <article class="archive-item">

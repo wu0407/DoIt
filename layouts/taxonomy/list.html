@@ -9,7 +9,6 @@
 
 {{- define "content" -}}
     {{- $params := .Scratch.Get "params" -}}
-
     <div class="page archive">
         {{- /* Title */ -}}
         <h2 class="single-title animate__animated animate__pulse animate__faster">
@@ -58,8 +57,7 @@
         {{- if .Pages -}}
             {{- $taxonomy := .Data.Singular -}}
             {{- if eq $taxonomy "series" -}}
-                {{- $pages := .Paginate (.Pages.ByParam "series_weight") -}}
-                {{- range $pages.Pages -}}
+                {{- range .Paginator.Pages -}}
                     <article class="archive-item">
                         <a href="{{ .RelPermalink }}" class="archive-item-link">
                             {{- .Title -}}
@@ -70,8 +68,7 @@
                     </article>
                 {{- end -}}
             {{- else -}}
-                {{- $pages := .Paginate (.Pages.GroupByDate "2006") -}}
-                {{- range $pages.PageGroups -}}
+                {{- range .Paginator.PageGroups -}}
                     <h3 class="group-title">{{ .Key }}</h3>
                     {{- range .Pages -}}
                         <article class="archive-item">

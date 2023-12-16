@@ -19,7 +19,7 @@
 {{- end -}}
 
 {{ $canonicalURL := .Permalink }}
-{{ with .Paginator }}
+{{ with .Scratch.Get "paginatorPager"  }}
   {{ $canonicalURL = .URL | absLangURL }}
 {{ end }}
 <link rel="canonical" href="{{ $canonicalURL }}" />

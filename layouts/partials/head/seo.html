@@ -153,18 +153,19 @@
 {{- /* Home SEO */ -}}
 {{- if .IsHome -}}
     {{- $showBlogPosting := and .Site.RegularPages .Site.Params.home.posts.enable -}}
-    {{- $showWebSite := and (eq .Paginator.PageNumber 1) (eq .Paginator.URL "/") -}}
+    {{- $paginatorPager := .Scratch.Get "paginatorPager" -}}
+    {{- $showWebSite := and $paginatorPager (eq $paginatorPager.PageNumber 1) (eq $paginatorPager.URL "/") -}}
     {{- if or $showBlogPosting $showWebSite -}}
         <script type="application/ld+json">
         {"@context": "https://schema.org",
         "@graph": [
         {{- if $showBlogPosting -}}
             {{- /* Paginate is first call on baseof.html */ -}}
-            {{- range .Paginator.Pages -}}
+            {{- range $paginatorPager.Pages -}}
                 {{- template "blogPosting" . -}},
             {{- end -}}
         {{- end -}}
-        {{- if and (eq .Paginator.PageNumber 1) (eq .Paginator.URL "/") -}}
+        {{- if and (eq $paginatorPager.PageNumber 1) (eq $paginatorPager.URL "/") -}}
             {
                 "@type": "WebSite",
                 "url": {{ .Permalink }},
