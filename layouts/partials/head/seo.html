@@ -23,7 +23,7 @@
 {{- define "blogPosting" -}}
 {{- $params := .Scratch.Get "params" -}}
 {
-    {{- if not .IsPage -}}
+    {{- if not .IsHome | and .IsPage -}}
     "@context": "https://schema.org",
     {{- end -}}
     "@type": "BlogPosting",
