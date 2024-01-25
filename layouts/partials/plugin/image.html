@@ -42,7 +42,6 @@
             loading="{{ $loading }}"
             src="{{ $src | safeURL }}"
             srcset="{{ $small | safeURL }}, {{ $src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
-            sizes="auto"
             alt="{{ $alt }}"{{ with $height }} height="{{ . }}" {{ end }}{{ with $width }} width="{{ . }}" {{ end }}>
     </a>
 {{- else -}}
@@ -51,7 +50,6 @@
         loading="{{ $loading }}"
         src="{{ $src | safeURL }}"
         srcset="{{ $small | safeURL }}, {{ $src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
-        sizes="auto"
         alt="{{ $alt }}"
         title="{{ .Title | default $alt }}"{{ with $height }} height="{{ . }}" {{ end }} {{ with $width }} width="{{ . }}" {{ end }}>
 {{- end -}}
