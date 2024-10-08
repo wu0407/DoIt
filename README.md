@@ -57,7 +57,7 @@ To see this theme in action, here is a live [demo site](https://hugodoit.pages.d
 * Some beautiful **CSS animations**
 * Easy-to-use and self-expanding **table of contents**
 * More **social links**, **share sites** and **comment system**
-* **Search** supported by [algolia](https://www.algolia.com/) or [Fuse.js](https://fusejs.io/)
+* **Search** supported by [algolia](https://www.algolia.com/), [Fuse.js](https://fusejs.io/) or [Pagefind](https://pagefind.app)
 * **Copy code** to clipboard with one click
 * Extended Markdown syntax for **[Font Awesome](https://fontawesome.com/) icons**
 * Extended Markdown syntax for **ruby annotation**
@@ -99,7 +99,7 @@ the DoIt theme may be more suitable for you.
 ### Appearance and Layout
 
 * **Responsive** layout
-* **Light/Dark/Black** mode
+* **Light/Dark** mode
 * Globally consistent **design language**
 * **Pagination** supported
 * Easy-to-use and self-expanding **table of contents**
@@ -207,17 +207,14 @@ DoIt is licensed under the **MIT** license. Check the [LICENSE file](https://git
 
 Thanks to the authors of following resources included in the theme:
 
-* [normalize.css](https://github.com/necolas/normalize.css)
 * [Font Awesome](https://fontawesome.com/)
 * [Simple Icons](https://github.com/simple-icons/simple-icons)
-* [Animate.css](https://daneden.github.io/animate.css/)
 * [autocomplete.js](https://github.com/algolia/autocomplete.js)
 * [algoliasearch](https://github.com/algolia/algoliasearch-client-javascript)
 * [Fuse.js](https://fusejs.io/)
 * [object-fit-images](https://github.com/fregante/object-fit-images)
 * [Twemoji](https://github.com/twitter/twemoji)
 * [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
-* [clipboard.js](https://github.com/zenorocha/clipboard.js)
 * [Sharer.js](https://github.com/ellisonleao/sharer.js)
 * [TypeIt](https://typeitjs.com/)
 * [KaTeX](https://katex.org/)

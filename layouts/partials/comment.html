@@ -4,7 +4,8 @@
 {{- $commentConfig := dict -}}
 
 {{- if $comment.enable -}}
-    <div id="comments">
+    {{- .Scratch.SetInMap "this" "commentEnabled" true -}}
+    <div id="comments" class="print:!tw-hidden tw-pt-32 tw-pb-8">
         {{- /* Disqus Comment System */ -}}
         {{- $disqus := $comment.disqus | default dict -}}
         {{- if $disqus.enable -}}
@@ -78,7 +79,7 @@
             <div id="waline" class="comment"></div>
             {{- $source := $cdn.walineCSS | default "lib/waline/waline.css" -}}
             {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
-            {{- $commentConfig = dict "el" "#waline" "serverURL" $waline.serverURL "lang" .Lang "dark" "body[theme='dark'], body[theme='black']" "copyright" true | dict "waline" | merge $commentConfig -}}
+            {{- $commentConfig = dict "el" "#waline" "serverURL" $waline.serverURL "lang" .Lang "dark" "body[theme='dark']" "copyright" true | dict "waline" | merge $commentConfig -}}
             {{- with $waline.pageview -}}
                 {{- $commentConfig = dict "pageview" . | dict "waline" | merge $commentConfig -}}
             {{- end -}}
@@ -322,6 +323,7 @@
             {{- $commentConfig = $giscus.lightTheme | default "light" | dict "lightTheme" | dict "giscus" | merge $commentConfig -}}
             {{- $commentConfig = $giscus.darkTheme | default "dark" | dict "darkTheme" | dict "giscus" | merge $commentConfig -}}
             {{- $commentConfig = $giscus.dataLang | default "en" | dict "dataLang" | dict "giscus" | merge $commentConfig -}}
+            {{- $commentConfig = $giscus.dataLoading | default "lazy" | dict "dataLoading" | dict "giscus" | merge $commentConfig -}}
             {{- $options := dict "targetPath" "js/giscus.min.js" "minify" true -}}
             {{- $js := resources.Get "js/lib/giscus.js" | js.Build $options -}}
             {{- $_ := $js.RelPermalink -}}
