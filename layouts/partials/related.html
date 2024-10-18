@@ -25,7 +25,7 @@
                             (dict "Process" "resize 1200x webp q75" "descriptor" "1200w")
                             (dict "Process" "resize 1600x webp q75" "descriptor" "1600w") 
                         -}}
-                        {{- dict "Src" $image "Height" "200" "Width" "400" "Resources" $resource "OptimConfig" $optimize "Title" $title | partial "plugin/image.html" -}}
+                        {{- dict "Src" $image "Resources" $resource "OptimConfig" $optimize "Title" $title | partial "plugin/image.html" -}}
                 </div>
                 {{- end -}}
                 <h2 class="related-title">
