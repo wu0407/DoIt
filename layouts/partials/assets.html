@@ -52,7 +52,8 @@
 {{- end -}}
 
 {{- /* lightgallery.js */ -}}
-{{- if $params.lightgallery -}}
+{{- printf "assets this is %v on %v time %v" (.Scratch.Get "this") .Page.RelPermalink time.Now -}}
+{{- if or .IsHome (and $params.lightgallery (.Scratch.Get "this").lightgallery) -}}
     {{- $source := $cdn.lightgalleryCSS | default "lib/lightgallery/lightgallery.min.css" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
     {{- $source := $cdn.lightgalleryJS | default "lib/lightgallery/lightgallery.min.js" -}}

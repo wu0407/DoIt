@@ -50,6 +50,8 @@
 {{- end -}}
 
 {{- .Scratch.Set "params" $params -}}
-{{- .Scratch.Set "this" dict -}}
+{{- if not .IsPage -}}
+    {{- .Scratch.Set "this" dict -}}
+{{- end -}}
 
 {{- partial "plugin/compatibility.html" . -}}

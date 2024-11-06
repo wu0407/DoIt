@@ -1,4 +1,6 @@
 {{- $lightgallery := .Page.Params.lightgallery | default site.Params.Page.lightgallery | default false -}}
+{{- .Page.Scratch.SetInMap "this" "lightgallery" $lightgallery -}}
+{{- printf "this is %v on %v time %v" (.Page.Scratch.Get "this") .Page.RelPermalink time.Now -}}
 {{- $optim := slice 
     (dict "Process" "resize 800x webp q75" "descriptor" "800w")
     (dict "Process" "resize 1200x webp q75" "descriptor" "1200w")
